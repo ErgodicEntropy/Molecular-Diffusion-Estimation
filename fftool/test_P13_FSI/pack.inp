@@ -1,0 +1,14 @@
+# created by fftool
+tolerance 2.5
+filetype xyz
+output simbox.xyz
+
+structure FSI_pack.xyz
+  number 10
+  inside box 1.5000 1.5000 1.5000 18.5000 18.5000 18.5000
+end structure
+
+structure P13_pack.xyz
+  number 10
+  inside box 1.5000 1.5000 1.5000 18.5000 18.5000 18.5000
+end structure

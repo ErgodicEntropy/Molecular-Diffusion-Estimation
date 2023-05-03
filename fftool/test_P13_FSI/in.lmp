@@ -1,0 +1,69 @@
+# created by fftool
+
+units real
+boundary p p p
+
+atom_style full
+bond_style harmonic
+angle_style harmonic
+dihedral_style opls
+
+read_data data.lmp
+# read_restart restart.*.lmp
+
+special_bonds lj/coul 0.0 0.0 0.5
+
+pair_style hybrid lj/cut/coul/long 12.0 12.0
+pair_modify mix geometric tail yes
+kspace_style pppm 1.0e-4
+
+pair_coeff    1    1 lj/cut/coul/long     0.053000     2.950000  # FSI FSI
+pair_coeff    2    2 lj/cut/coul/long     0.250000     3.550000  # SBT SBT
+pair_coeff    3    3 lj/cut/coul/long     0.170000     3.250000  # NBT NBT
+pair_coeff    4    4 lj/cut/coul/long     0.210000     2.960000  # OBT OBT
+pair_coeff    5    5 lj/cut/coul/long     0.170000     3.250000  # N4 N4
+pair_coeff    6    6 lj/cut/coul/long     0.065999     3.500000  # C1 C1
+pair_coeff    7    7 lj/cut/coul/long     0.065999     3.500000  # C2 C2
+pair_coeff    8    8 lj/cut/coul/long     0.030000     2.500000  # H1 H1
+pair_coeff    9    9 lj/cut/coul/long     0.030000     2.500000  # HC HC
+pair_coeff   10   10 lj/cut/coul/long     0.065999     3.500000  # CT CT
+
+minimize 1.0e-4 1.0e-6 100 1000
+reset_timestep 0
+
+fix SHAKE all shake 0.0001 20 0 b 6
+
+neighbor 2.0 bin
+
+timestep 1.0
+
+variable TK equal 300.0
+variable PBAR equal 1.0
+
+velocity all create ${TK} 12345
+
+fix TPSTAT all npt temp ${TK} ${TK} 100 iso ${PBAR} ${PBAR} 500
+
+variable nsteps equal 10000
+variable nprint equal ${nsteps}/100
+variable ndump equal ${nsteps}/100
+# variable nrestart equal ${nsteps}/10
+
+# compute RDF all rdf 100 1 1
+# fix RDF all ave/time 20 100 ${nsteps} c_RDF file rdf.lammps mode vector
+
+# compute MSD all msd
+# fix MSD all ave/time 1 1 ${ndump} c_MSD[1] c_MSD[2] c_MSD[3] c_MSD[4] file msd.lammps
+
+dump TRAJ all custom ${ndump} dump.lammpstrj id mol type element x y z ix iy iz
+dump_modify TRAJ element F S N O N C C H H C
+
+thermo_style multi
+thermo ${nprint}
+
+# restart ${nrestart} restart.*.lmp
+
+run ${nsteps}
+
+write_restart restart.*.lmp
+write_data data.*.lmp
