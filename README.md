@@ -23,6 +23,15 @@ the timestep size can be increased via SHAKE constraint algorithm which is based
 - Simulation Size: In the context of MD simulations, simulation size is the number of particles of the system. Simulation size dictates the computational methods used; explicit or implicit. Naturally, in the case of short systems, explicit methods are preferred while implicit methods (usually those based on mean field theories) are more compatible with large systems.
 - Simulation Box: In the context of MD simulations, simulation size is the number of particles of the system. Simulation size dictates the computational methods used; explicit or implicit. Naturally, in the case of short systems, explicit methods are preferred while implicit methods (usually those based on mean field theories) are more compatible with large systems.
 
+## Simulation steps: 
+
+-Initialization: it can be random Gaussians for velocities and/or coordinates. This process might be followed by ''packing'' all atoms in one corner (thanks to Packmol software) to avoid perturbation that may result from short-range repulsions (Pauli exclusion principle).
+- Potential Evaluation: This is the most CPU intensive step due to the evaluation of non-bonded (pairstyle) potential ie; Couloumb potential and Van Der Wals force. This is due to the fact that although intermolecular forces are weaker than intramolecular forces (which is the reason why we have molecules), intermolecular forces are non local which implies that their influence pervades all the system (worst-case scenario of a complexity of O(n^{2})).\ 
+- Energy minimization/equilibration: Energy equilibration is rendering kinetic energy equally distributed among constituent particles (this can be done using methods like dynamically-updated velocity rescaling). Energy minimization is the process of relaxing the system to its stable state in order to render the simulation more accurate and more representative of reality\
+- LAMMPS run: Predict the motion by updating the values of coordinates and velocities by integrating Newton's equations (this is basically what LAMMPS ''run'' commands does)\
+- Data collection: This is the step after the simulation terminates, collecting average values of parameters of interest (diffusion, temperature..etc)\
+- Data analysis: This is a very important step (contrary to popular believes) because it's the step where one has to analyze the average values obtained from the simulation to see whether the simulation is accurate, converges or stable. If the simulation is fine, then it's a good opportunity to virtually investigate the system accurately without the need to experimentations (in the case of experiments being dangerous, time consuming or merely impossible). Data analysis is the step where it is possible to infer conclusions about atom-level phenomena that are not directly observed or purely virtual (alternative events that didn't happen in the physical world..etc)\
+
 
 
 
