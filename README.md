@@ -34,16 +34,13 @@ the timestep size can be increased via SHAKE constraint algorithm which is based
 
 ## Diffusion coefficient: 
 
-Diffusion is the irreversible phenomenon of particles movement en mass from region of high concentration to reigions with low concentration following Fick's law.\
+Diffusion is the irreversible phenomenon of particles movement en mass from region of high concentration to reigions with low concentration following Fick's law.
 
 Fick's first law is a phenomenological law (just like its counterpart Fourier's law) meaning that it's not derived from theory nor it's universal, but it's derived from observation in a way that's nonetheless coherent with theory. Fick's first law indicates the relationship between the diffusion flux and concentration gradient as follow:
-
-\begin{equation}
-
 J = -D * (∂φ/∂x)
 
 
-\end{equation}
+
 
 
 
@@ -53,25 +50,21 @@ Fick's first law is a form of a moderation law (in the sense of control theory) 
 
 Fick's second law, just like the first law, is describing the same phenomenon but in a way that provides a fundamental insight about the phenomenon of diffusion; namely its relationship with the second law of thermodynamics. Fick's second law is stated as follow:
 
-\begin{equation}
-
-
 (∂φ/∂t) = D * (∂^2φ/∂x^2)
 
-\end{equation}
 
 
 
 
 
-Fick's second law is similar to the heat equation. Both are characterized by a time-reversal asymmetry (unlike D'alembert wave propagation equation) because of the first derivative with respect to time which indicates the irreversible nature of the diffusion phenomenon. Such a time-reversal asymmetry is due to the second law of thermodynamics which states that in closed systems, entropy never decreases and only increases (thus engendering the arrow of time; a hypothesis under the name of thermal time hypothesis put forth by Carlo Rovelli and Alain Connes)\
+Fick's second law is similar to the heat equation. Both are characterized by a time-reversal asymmetry (unlike D'alembert wave propagation equation) because of the first derivative with respect to time which indicates the irreversible nature of the diffusion phenomenon. Such a time-reversal asymmetry is due to the second law of thermodynamics which states that in closed systems, entropy never decreases and only increases (thus engendering the arrow of time; a hypothesis under the name of thermal time hypothesis put forth by Carlo Rovelli and Alain Connes)
 Given the time-reversal asymmetric nature of diffusion equation, it's said not to conserver information. This is known as Noether's theorem (symmetries in physics always correspond to a certain law of conservation; in the case of time-reversal symmetry, it's the information in the sense of Shannon)\
 
 From the point of view of simulation and mathematical modeling, diffusion can be modeled using random walks or Levy flights or Markov chains with the assumption of ergodicity. Because diffusion is a form of homogenization (recall the moderation law) therefore it's by definition an ergodic phenomenon (the second law of thermodynamics is a physical reformulation of the ergodic hypothesis first put forth by Ludwig Boltzmann)
 
 ## Discussion of results: 
 
-The results of the simulation indicate that the total energy, diffusion coefficient and volume increase with temperature. The following figures are illustrative representations of the results of the simulation:\
+The results of the simulation indicate that the total energy, diffusion coefficient and volume increase with temperature. The following figures are illustrative representations of the results of the simulation:
 
 
 
@@ -81,9 +74,8 @@ The results of the simulation indicate that the total energy, diffusion coeffici
 
 For the diffusion coefficient, the simulation results match the reality in encapsulating the relationship between diffusion coefficient and temperature. To recall, Einstein's relation (Stokes-Einstein-Smoluchowski equation) states that diffusion coefficient D is proportional to temperature T with the proportionality constant being the particles mobility (intrinsic to the molecules) times Boltzmann constant:
 
-\begin{equation}
 D = μ * k_B * T
-\end{equation}
+
 
 Albeit neglecting quantum effects playing out at the level of hydrogen bonds thanks to the Born-Oppenheimer approximation, we still managed to get results that reflect empirical reality. Therefore, this is an indication that the simulation is of high-fidelity which in turns implies that the model used (Newtonian dynamics) is accurate and representative of microscopic phenomena up to a certain threshold (dictated by the complementarity principle of Niels Bohr) beyond which the B-O approximation breaks down.\
 On a more fundamental level, the results of the simulation, guaranteeing high fidelity, reflect something deeper about the nature of the universe captured by one of the most famous concepts in statistical mechanics which is the fluctuation-dissipation theorem which is a phenomenological result from the field of statistical physics that is ''fundamental'' meaning that it occurs in different areas of physics (light absorption-heat, Johnson noise-Resistors, Diffusion-Joule Energy) due to the fact that it doesn't assume any natural laws (black-box) about the system it studies, resulting only from the a purely mathematical (statistical, to be precise) examination of the system. The theorem states that at equilibrium, any system in a detailed balance (stationary distribution of reversible Markov chain) such that for each elementary process there exists a reverse process that balances it, a process that causes energy dissipation (captured by abstracting the notion of impedance or admittance from electricity) by turning it into heat, is balanced by a reverse process in the form of thermal fluctuation which converts that heat back to the original form of energy (usually, kinetic energy).\
