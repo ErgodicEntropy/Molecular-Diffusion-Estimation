@@ -1,0 +1,71 @@
+# created by fftool
+
+units real
+boundary p p p
+
+atom_style full
+bond_style harmonic
+angle_style harmonic
+dihedral_style opls
+
+read_data data.lmp
+# read_restart restart.lmp
+
+special_bonds lj/coul 0.0 0.0 0.5
+
+pair_style hybrid lj/cut/coul/long 12.0 12.0
+pair_modify mix arithmetic tail yes
+kspace_style pppm 1.0e-5
+
+pair_coeff    1    1 lj/cut/coul/long     0.170000     3.250000  # N4 N4
+pair_coeff    2    2 lj/cut/coul/long     0.065999     3.500000  # C1 C1
+pair_coeff    3    3 lj/cut/coul/long     0.065999     3.500000  # CE CE
+pair_coeff    4    4 lj/cut/coul/long     0.030000     2.500000  # H1 H1
+pair_coeff    5    5 lj/cut/coul/long     0.030000     2.500000  # HC HC
+pair_coeff    6    6 lj/cut/coul/long     0.095005     3.580000  # B B
+pair_coeff    7    7 lj/cut/coul/long     0.060994     3.120000  # FB FB
+pair_coeff    8    8 lj/cut/coul/long     0.065989     3.300000  # CAC CAC
+pair_coeff    9    9 lj/cut/coul/long     0.065989     3.300000  # CAC1 CAC1
+pair_coeff   10   10 lj/cut/coul/long     0.015010     2.500000  # HAC HAC
+pair_coeff   11   11 lj/cut/coul/long     0.170005     3.200000  # NAC NAC
+
+#minimize 1.0e-4 1.0e-6 100 1000
+reset_timestep 0
+
+fix SHAKE all shake 0.0001 20 0 b 3
+neigh_modify delay 0 every 1 check yes
+
+neighbor 2.0 bin
+
+timestep 1.0
+
+compute myTemp all temp
+
+variable TK equal 300.0
+variable PBAR equal 1.0
+
+velocity all create ${TK} 12345
+
+thermo_style custom step cpu etotal ke pe evdwl ecoul elong temp press vol density
+fix Fmovestuff all npt temp ${TK} ${TK} 100.0 iso ${PBAR} ${PBAR} 500.0
+
+
+variable nsteps equal 40000
+variable nprint equal ${nsteps}/400
+variable ndump equal ${nsteps}/400
+variable nrestart equal ${nsteps}/40
+
+
+compute MSD all msd
+fix MSD all ave/time 1 1 ${ndump} c_MSD[1] c_MSD[2] c_MSD[3] c_MSD[4] file msd.lammps
+
+#dump TRAJ all custom ${ndump} dump.lammpstrj id mol type element x y z ix iy iz
+dump TRAJ all xyz 10000 positions.xyz
+dump_modify TRAJ element N C C H H B F C C H N
+
+thermo ${nprint}
+
+run ${nsteps}
+
+write_restart restart.eq.lmp
+write_data data.eq.lmp
