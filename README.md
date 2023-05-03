@@ -34,13 +34,13 @@ the timestep size can be increased via SHAKE constraint algorithm which is based
 
 ## Diffusion coefficient: 
 
-Diffusion is the irreversible phenomenon of particles movement en mass from region of high concentration to reigions with low concentration following Fick's law.\\
+Diffusion is the irreversible phenomenon of particles movement en mass from region of high concentration to reigions with low concentration following Fick's law.\
 
 Fick's first law is a phenomenological law (just like its counterpart Fourier's law) meaning that it's not derived from theory nor it's universal, but it's derived from observation in a way that's nonetheless coherent with theory. Fick's first law indicates the relationship between the diffusion flux and concentration gradient as follow:
 
 \begin{equation}
 
-J = -D $\frac{\partial\varphi}{\partial x}$
+J = -D \frac{\partial\varphi}{\partial x}
 
 \end{equation}
 
@@ -48,14 +48,14 @@ J = -D $\frac{\partial\varphi}{\partial x}$
 
 
 
-Fick's first law is a form of a moderation law (in the sense of control theory) because it's a regulation of a perturbation (the gradient of the concentration ie; the heterogeneity of concentration in space)\
+Fick's first law is a form of a moderation law (in the sense of control theory) because it's a regulation of a perturbation (the gradient of the concentration ie; the heterogeneity of concentration in space)
 
-Fick's second law, just like the first law, is describing the same phenomenon but in a way that provides a fundamental insight about the phenomenon of diffusion; namely its relationship with the second law of thermodynamics. Fick's second law is stated as follow: \
+Fick's second law, just like the first law, is describing the same phenomenon but in a way that provides a fundamental insight about the phenomenon of diffusion; namely its relationship with the second law of thermodynamics. Fick's second law is stated as follow:
 
 \begin{equation}
-$$
+
 \frac{\partial\varphi}{\partial  t} = D \frac{\partial2\varphi}{\partial  x^2} 
-$$
+
 \end{equation}
 
 
