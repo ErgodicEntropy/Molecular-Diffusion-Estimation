@@ -1,0 +1,23 @@
+#
+# water
+#
+
+tolerance 2.0
+filetype xyz
+output water64_LiTFSI1.xyz
+
+structure TFSI_conformer1.xyz 
+  number 1 
+  inside box 0. 0. 0. 10. 10. 10. 
+end structure
+
+structure Li.xyz 
+  number 1 
+  inside box 0. 0. 0. 10. 10. 10. 
+end structure
+
+structure water.xyz 
+  number 64 
+  inside box 0. 0. 0. 10. 10. 10. 
+end structure
+
