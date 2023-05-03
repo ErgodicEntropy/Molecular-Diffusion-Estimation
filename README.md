@@ -40,7 +40,8 @@ Fick's first law is a phenomenological law (just like its counterpart Fourier's 
 
 \begin{equation}
 
-J = -D \frac{\partial\varphi}{\partial x}
+J = -D * (∂φ/∂x)
+
 
 \end{equation}
 
@@ -54,7 +55,8 @@ Fick's second law, just like the first law, is describing the same phenomenon bu
 
 \begin{equation}
 
-\frac{\partial\varphi}{\partial  t} = D \frac{\partial2\varphi}{\partial  x^2} 
+
+(∂φ/∂t) = D * (∂^2φ/∂x^2)
 
 \end{equation}
 
@@ -80,7 +82,7 @@ The results of the simulation indicate that the total energy, diffusion coeffici
 For the diffusion coefficient, the simulation results match the reality in encapsulating the relationship between diffusion coefficient and temperature. To recall, Einstein's relation (Stokes-Einstein-Smoluchowski equation) states that diffusion coefficient D is proportional to temperature T with the proportionality constant being the particles mobility (intrinsic to the molecules) times Boltzmann constant:
 
 \begin{equation}
-D = \mu k_{B}T
+D = μ * k_B * T
 \end{equation}
 
 Albeit neglecting quantum effects playing out at the level of hydrogen bonds thanks to the Born-Oppenheimer approximation, we still managed to get results that reflect empirical reality. Therefore, this is an indication that the simulation is of high-fidelity which in turns implies that the model used (Newtonian dynamics) is accurate and representative of microscopic phenomena up to a certain threshold (dictated by the complementarity principle of Niels Bohr) beyond which the B-O approximation breaks down.\
